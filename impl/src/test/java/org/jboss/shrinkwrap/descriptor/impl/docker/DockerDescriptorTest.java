@@ -42,6 +42,8 @@ public class DockerDescriptorTest
       Assert.assertEquals("FROM jbossforge", descriptor.from().name("jbossforge").toString());
       Assert.assertEquals("USER George", descriptor.user().name("George").toString());
       assertThat(descriptor.getInstructions().size(), equalTo(2));
+      String output = descriptor.exportAsString();
+      Assert.assertEquals("FROM jbossforge\nUSER George", output);
    }
 
    @Test

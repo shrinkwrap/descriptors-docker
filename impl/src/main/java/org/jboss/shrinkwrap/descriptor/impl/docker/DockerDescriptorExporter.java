@@ -9,6 +9,7 @@ package org.jboss.shrinkwrap.descriptor.impl.docker;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 
 import org.jboss.shrinkwrap.descriptor.api.DescriptorExportException;
 import org.jboss.shrinkwrap.descriptor.api.DescriptorExporter;
@@ -27,12 +28,15 @@ public enum DockerDescriptorExporter implements DescriptorExporter<DockerDescrip
    public void to(DockerDescriptor descriptor, OutputStream out) throws DescriptorExportException,
             IllegalArgumentException
    {
+      List<DockerInstruction> instructions = descriptor.getInstructions();
       try (PrintWriter writer = new PrintWriter(out, true))
       {
-         for (DockerInstruction dockerInstruction : descriptor.getInstructions())
+         for (int i = 0; i < instructions.size(); i++)
          {
+            DockerInstruction dockerInstruction = instructions.get(i);
             dockerInstruction.export(writer);
-            writer.println();
+            if (i != instructions.size() - 1)
+               writer.println();
          }
       }
    }
