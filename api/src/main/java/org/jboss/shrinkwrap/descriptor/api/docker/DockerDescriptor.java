@@ -10,7 +10,20 @@ package org.jboss.shrinkwrap.descriptor.api.docker;
 import java.util.List;
 
 import org.jboss.shrinkwrap.descriptor.api.Descriptor;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.AddInstruction;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.CmdInstruction;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.CopyInstruction;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.DockerInstruction;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.EntrypointInstruction;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.EnvInstruction;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.ExposeInstruction;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.FromInstruction;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.MaintainerInstruction;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.OnBuildInstruction;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.RunInstruction;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.UserInstruction;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.VolumeInstruction;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.WorkdirInstruction;
 
 /**
  * This deployment descriptor provides the functionalities as described in the
@@ -22,7 +35,7 @@ import org.jboss.shrinkwrap.descriptor.api.docker.instruction.DockerInstruction;
 public interface DockerDescriptor extends Descriptor
 {
    /**
-    * @return list of {@link DockerInstruction}
+    * @return list of all {@link DockerInstruction}
     */
    List<DockerInstruction> getInstructions();
 
@@ -31,49 +44,74 @@ public interface DockerDescriptor extends Descriptor
     * must have <code>FROM</code> as its first instruction. The image can be any valid image – it is especially easy to
     * start by pulling an image from the Public Repositories.
     * 
-    * @param image the image to be used in the <code>FROM</code> element
-    * @return the current instance of {@link DockerDescriptor}
+    * @return a {@link FromInstruction} instance
     */
-   DockerDescriptor from(String image);
+   FromInstruction from();
 
    /**
-    * @return the <code>FROM</code> element
+    * @return the current {@link FromInstruction} or <code>null</code> if not found
     */
-   String getFrom();
+   FromInstruction getFrom();
 
    /**
     * The <code>MAINTAINER</code> allows you to set the Author field of the generated images.
     * 
-    * @param from the <code>MAINTAINER</code> element
-    * @return the current instance of {@link DockerDescriptor}
+    * @return a new instance of {@link MaintainerInstruction}
     */
-   DockerDescriptor maintainer(String from);
+   MaintainerInstruction maintainer();
 
    /**
-    * @return the <code>MAINTAINER</code> element
+    * @return the current {@link MaintainerInstruction} or <code>null</code> if not found
     */
-   String getMaintainer();
+   MaintainerInstruction getMaintainer();
+
+   /**
+    * Remove the existing <code>MAINTAINER</code>.
+    * 
+    * @return the current instance of {@link DockerDescriptor}
+    */
+   DockerDescriptor removeMaintainer();
 
    /**
     * The <code>RUN</code> instruction will execute any commands in a new layer on top of the current image and commit
     * the results. The resulting committed image will be used for the next step in the Dockerfile.
     * 
-    * @param command
-    * @param parameters
+    * @return a new {@link RunInstruction} instance
+    */
+   RunInstruction run();
+
+   /**
+    * @return all <code>RUN</code> instructions or an empty {@link List} if not found
+    */
+   List<RunInstruction> getAllRun();
+
+   /**
+    * Remove all the existing <code>RUN</code> instructions.
+    * 
     * @return the current instance of {@link DockerDescriptor}
     */
-   DockerDescriptor run(String command, String... parameters);
+   DockerDescriptor removeAllRun();
 
    /**
     * The main purpose of a <code>CMD</code> is to provide defaults for an executing container. These defaults can
     * include an executable, or they can omit the executable, in which case you must specify an <code>ENTRYPOINT</code>
     * instruction as well.
     * 
-    * @param command
-    * @param parameters
+    * @return the current instance or a new instance of {@link CmdInstruction}
+    */
+   CmdInstruction cmd();
+
+   /**
+    * @return the current {@link CmdInstruction} or <code>null</code> if not found
+    */
+   CmdInstruction getCmd();
+
+   /**
+    * Remove the current {@link CmdInstruction} if exists.
+    * 
     * @return the current instance of {@link DockerDescriptor}
     */
-   DockerDescriptor cmd(String command, String... parameters);
+   DockerDescriptor removeCmd();
 
    /**
     * The <code>EXPOSE</code> instructions informs Docker that the container will listen on the specified network ports
@@ -83,77 +121,154 @@ public interface DockerDescriptor extends Descriptor
     * Note: <code>EXPOSE</code> doesn't define which ports can be exposed to the host or make ports accessible from the
     * host by default. To expose ports to the host, at runtime, use the -p flag or the -P flag.
     * 
-    * @param ports
     * @return the current instance of {@link DockerDescriptor}
     */
-   DockerDescriptor expose(int... ports);
+   ExposeInstruction expose();
+
+   /**
+    * @return all <code>EXPOSE</code> instructions or an empty {@link List} if not found
+    */
+   List<ExposeInstruction> getAllExpose();
+
+   /**
+    * Remove all the existing <code>EXPOSE</code> instructions.
+    * 
+    * @return the current instance of {@link DockerDescriptor}
+    */
+   DockerDescriptor removeAllExpose();
 
    /**
     * The <code>ENV</code> instruction sets the environment variable <b>key</b> to the value <b>value</b>. This value
     * will be passed to all future <code>RUN</code> instructions.
     * 
-    * @param key
-    * @param value
+    * @return a new instance of {@link EnvInstruction}
+    */
+   EnvInstruction env();
+
+   /**
+    * @return all <code>ENV</code> instructions or an empty {@link List} if not found
+    */
+   List<EnvInstruction> getAllEnv();
+
+   /**
+    * Remove all the existing <code>ENV</code> instructions.
+    * 
     * @return the current instance of {@link DockerDescriptor}
     */
-   DockerDescriptor env(String key, String value);
+   DockerDescriptor removeAllEnv();
 
    /**
     * The <code>ADD</code> instruction copies new files, directories or remote file URLs from <b>src</b> and adds them
     * to the filesystem of the container at the path <b>dest</b>.
     * 
-    * @param src
-    * @param dest
+    * @return a new ADD instance of {@link AddInstruction}
+    */
+   AddInstruction add();
+
+   /**
+    * @return all <code>ADD</code> instructions or an empty {@link List} if not found
+    */
+   List<AddInstruction> getAllAdd();
+
+   /**
+    * Remove all the existing <code>ADD</code> instructions.
+    * 
     * @return the current instance of {@link DockerDescriptor}
     */
-   DockerDescriptor add(String src, String dest);
+   DockerDescriptor removeAllAdd();
 
    /**
     * 
     * The <code>COPY</code> instruction copies new files or directories from <b>src</b> and adds them to the filesystem
     * of the container at the path <b>dest</b>.
     * 
-    * @param src
-    * @param dest
     * @return the current instance of {@link DockerDescriptor}
     */
-   DockerDescriptor copy(String src, String dest);
+   CopyInstruction copy();
+
+   /**
+    * @return all <code>COPY</code> instructions or an empty {@link List} if not found
+    */
+   List<CopyInstruction> getAllCopy();
+
+   /**
+    * Remove all the existing <code>COPY</code> instructions.
+    * 
+    * @return the current instance of {@link DockerDescriptor}
+    */
+   DockerDescriptor removeAllCopy();
 
    /**
     * An <code>ENTRYPOINT</code> allows you to configure a container that will run as an executable.
     * 
-    * @param cmd
-    * @param parameters
-    * @return the current instance of {@link DockerDescriptor}
+    * @return The existing {@link EntrypointInstruction} instruction or a new instance
     */
-   DockerDescriptor entrypoint(String cmd, String... parameters);
+   EntrypointInstruction entrypoint();
+
+   /**
+    * @return The existing <code>ENTRYPOINT</code> instruction or null if not found
+    */
+   EntrypointInstruction getEntrypoint();
 
    /**
     * The VOLUME instruction will create a mount point with the specified name and mark it as holding externally mounted
     * volumes from native host or other containers.
     * 
-    * @param volume
+    * @return The existing {@link EntrypointInstruction} instruction or a new instance
+    */
+   VolumeInstruction volume();
+
+   /**
+    * @return all <code>VOLUME</code> instructions or an empty {@link List} if not found
+    */
+   List<VolumeInstruction> getAllVolume();
+
+   /**
+    * Remove all the existing <code>VOLUME</code> instructions.
+    * 
     * @return the current instance of {@link DockerDescriptor}
     */
-   DockerDescriptor volume(String volume, String... additionalVolumes);
+   DockerDescriptor removeAllVolume();
 
    /**
     * The <code>USER</code> instruction sets the user name or UID to use when running the image and for any
     * <code>RUN</code>, <code>CMD</code> and <code>ENTRYPOINT</code> instructions that follow it in the Dockerfile.
     * 
-    * @param user
     * @return the current instance of {@link DockerDescriptor}
     */
-   DockerDescriptor user(String user);
+   UserInstruction user();
+
+   /**
+    * @return The existing <code>USER</code> instruction or null if not found
+    */
+   UserInstruction getUser();
+
+   /**
+    * Remove the existing <code>USER</code> instruction.
+    * 
+    * @return the current instance of {@link DockerDescriptor}
+    */
+   DockerDescriptor removeUser();
 
    /**
     * The <code>WORKDIR</code> instruction sets the working directory for any <code>RUN</code>, <code>CMD</code> and
     * <code>ENTRYPOINT</code> instructions that follow it in the Dockerfile.
     * 
-    * @param workdir
     * @return the current instance of {@link DockerDescriptor}
     */
-   DockerDescriptor workdir(String workdir);
+   WorkdirInstruction workDir();
+
+   /**
+    * @return all <code>WORKDIR</code> instructions or an empty {@link List} if not found
+    */
+   List<WorkdirInstruction> getAllWorkDir();
+
+   /**
+    * Remove all <code>WORKDIR</code> instructions.
+    * 
+    * @return the current instance of {@link DockerDescriptor}
+    */
+   DockerDescriptor removeAllWorkDir();
 
    /**
     * The <code>ONBUILD</code> instruction adds to the image a trigger instruction to be executed at a later time, when
@@ -161,8 +276,19 @@ public interface DockerDescriptor extends Descriptor
     * build, as if it had been inserted immediately after the <code>FROM</code> instruction in the downstream
     * Dockerfile.
     * 
-    * @param instruction
     * @return the current instance of {@link DockerDescriptor}
     */
-   DockerDescriptor onbuild(DockerInstruction instruction);
+   OnBuildInstruction onBuild();
+
+   /**
+    * @return all <code>ONBUILD</code> instructions or an empty {@link List} if not found
+    */
+   List<OnBuildInstruction> getAllOnBuild();
+
+   /**
+    * Remove all <code>ONBUILD</code> instructions.
+    * 
+    * @return the current instance of {@link DockerDescriptor}
+    */
+   DockerDescriptor removeAllOnBuild();
 }

@@ -11,9 +11,7 @@ package org.jboss.shrinkwrap.descriptor.api.docker.instruction;
  * 
  * @author <a href="ggastald@redhat.com">George Gastaldi</a>
  */
-public interface FromInstruction extends DockerInstruction
+public interface VolumeInstruction extends DockerInstruction
 {
-   String getName();
 
-   FromInstruction name(String name);
 }
