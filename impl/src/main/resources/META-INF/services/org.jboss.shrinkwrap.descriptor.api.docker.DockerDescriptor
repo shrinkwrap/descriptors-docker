@@ -1,0 +1,3 @@
+implClass=org.jboss.shrinkwrap.descriptor.impl.docker.DockerDescriptorImpl
+importerClass=org.jboss.shrinkwrap.descriptor.impl.docker.DockerDescriptorImporterImpl
+defaultName=Dockerfile
