@@ -63,4 +63,10 @@ public class CopyInstructionImpl extends AbstractDockerInstruction implements Co
       writer.append("COPY ").append(source).append(" ").append(destination);
    }
 
+   @Override
+   public void read(String line)
+   {
+      String[] split = line.substring(6).split(" ");
+      source(split[1]).destination(split[2]);
+   }
 }

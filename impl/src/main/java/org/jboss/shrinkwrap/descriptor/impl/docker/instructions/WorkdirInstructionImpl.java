@@ -46,4 +46,10 @@ public class WorkdirInstructionImpl extends AbstractDockerInstruction implements
       writer.append("WORKDIR ").append(path);
    }
 
+   @Override
+   public void read(String line)
+   {
+      path(line.substring(9));
+   }
+
 }

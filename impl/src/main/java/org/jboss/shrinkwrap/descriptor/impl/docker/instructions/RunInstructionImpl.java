@@ -68,4 +68,11 @@ public class RunInstructionImpl extends AbstractDockerInstruction implements Run
       }
    }
 
+   @Override
+   public void read(String line)
+   {
+      // TODO: Review
+      String[] split = line.substring(4).split(" ");
+      parameters(split);
+   }
 }

@@ -46,4 +46,10 @@ public class VolumeInstructionImpl extends AbstractDockerInstruction implements 
       writer.append("VOLUME ").append(name);
    }
 
+   @Override
+   public void read(String line)
+   {
+      name(line.substring(8));
+   }
+
 }

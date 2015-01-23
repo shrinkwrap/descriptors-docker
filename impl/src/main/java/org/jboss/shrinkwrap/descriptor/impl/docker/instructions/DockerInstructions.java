@@ -160,7 +160,9 @@ public enum DockerInstructions
       {
          if (inst.handles(input))
          {
-            return inst.create(descriptor);
+            DockerInstruction create = inst.create(descriptor);
+            create.read(input);
+            return create;
          }
       }
       throw new IllegalArgumentException("Input not recognized: " + input);

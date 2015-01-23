@@ -61,4 +61,17 @@ public class ExposeInstructionImpl extends AbstractDockerInstruction implements 
          }
       }
    }
+
+   @Override
+   public void read(String line)
+   {
+      String[] split = line.substring(8).split(" ");
+      List<Integer> ports = new ArrayList<>();
+      for (String port : split)
+      {
+         ports.add(Integer.valueOf(port));
+      }
+      ports(ports.toArray(new Integer[ports.size()]));
+   }
+
 }

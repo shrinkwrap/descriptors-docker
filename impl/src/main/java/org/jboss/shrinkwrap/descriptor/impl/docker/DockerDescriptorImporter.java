@@ -7,11 +7,17 @@
 
 package org.jboss.shrinkwrap.descriptor.impl.docker;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import org.jboss.shrinkwrap.descriptor.api.DescriptorImportException;
 import org.jboss.shrinkwrap.descriptor.api.DescriptorImporter;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.DockerInstruction;
+import org.jboss.shrinkwrap.descriptor.impl.docker.instructions.DockerInstructions;
 import org.jboss.shrinkwrap.descriptor.spi.DescriptorImporterBase;
 
 /**
@@ -36,10 +42,51 @@ public class DockerDescriptorImporter<T extends DockerDescriptor> extends Descri
       super(endUserViewImplType, descriptorName);
    }
 
+   @SuppressWarnings("unchecked")
    @Override
    public T fromStream(InputStream in, boolean close) throws IllegalArgumentException, DescriptorImportException
    {
-      return null;
-   }
+      DockerDescriptor descriptor = Descriptors.create(DockerDescriptor.class);
+      if (close)
+      {
+         try (BufferedReader reader = new BufferedReader(new InputStreamReader(in)))
+         {
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+               if (!line.trim().isEmpty())
+               {
+                  DockerInstruction instruction = DockerInstructions.create(line, descriptor);
+                  descriptor.addInstruction(instruction);
+               }
+            }
+         }
+         catch (IOException e)
+         {
+            throw new DescriptorImportException("Could not import descriptor", e);
+         }
+      }
+      else
+      {
+         try
+         {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+               if (!line.trim().isEmpty())
+               {
+                  DockerInstruction instruction = DockerInstructions.create(line, descriptor);
+                  descriptor.addInstruction(instruction);
+               }
+            }
+         }
+         catch (IOException e)
+         {
+            throw new DescriptorImportException("Could not import descriptor", e);
+         }
 
+      }
+      return (T) descriptor;
+   }
 }

@@ -68,4 +68,11 @@ public class EntrypointInstructionImpl extends AbstractDockerInstruction impleme
       }
    }
 
+   @Override
+   public void read(String line)
+   {
+      String[] split = line.substring(12).split(" ");
+      parameters(split);
+   }
+
 }

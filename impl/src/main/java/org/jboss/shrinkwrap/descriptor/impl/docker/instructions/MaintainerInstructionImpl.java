@@ -49,4 +49,11 @@ public class MaintainerInstructionImpl extends AbstractDockerInstruction impleme
          throw new IllegalStateException("name is empty or null");
       writer.append("MAINTAINER ").append(name);
    }
+
+   @Override
+   public void read(String line)
+   {
+      name(line.substring(11));
+   }
+
 }

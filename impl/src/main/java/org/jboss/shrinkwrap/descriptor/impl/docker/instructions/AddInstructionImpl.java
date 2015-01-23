@@ -62,4 +62,10 @@ class AddInstructionImpl extends AbstractDockerInstruction implements AddInstruc
       writer.append("ADD ").append(source).append(" ").append(destination);
    }
 
+   @Override
+   public void read(String line)
+   {
+      String[] split = line.substring(4).split(" ");
+      source(split[0]).destination(split[1]);
+   }
 }

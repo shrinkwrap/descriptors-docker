@@ -67,4 +67,11 @@ class CmdInstructionImpl extends AbstractDockerInstruction implements CmdInstruc
          writer.append(parameters.get(0));
       }
    }
+
+   @Override
+   public void read(String line)
+   {
+      String[] split = line.substring(4).split(" ");
+      parameters(split);
+   }
 }

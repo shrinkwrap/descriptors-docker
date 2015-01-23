@@ -370,6 +370,20 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
       return this;
    }
 
+   /*
+    * (non-Javadoc)
+    * 
+    * @see
+    * org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor#addInstruction(org.jboss.shrinkwrap.descriptor.api
+    * .docker.instruction.DockerInstruction)
+    */
+   @Override
+   public DockerDescriptor addInstruction(DockerInstruction instruction)
+   {
+      this.instructions.add(instruction);
+      return this;
+   }
+
    @SuppressWarnings("unchecked")
    private <T extends DockerInstruction> T findFirst(Class<T> type)
    {

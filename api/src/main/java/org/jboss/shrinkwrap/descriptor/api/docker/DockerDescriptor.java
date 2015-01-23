@@ -36,11 +36,6 @@ import org.jboss.shrinkwrap.descriptor.api.docker.instruction.WorkdirInstruction
 public interface DockerDescriptor extends Descriptor
 {
    /**
-    * @return list of all {@link DockerInstruction}
-    */
-   List<DockerInstruction> getInstructions();
-
-   /**
     * The <code>FROM</code> instruction sets the Base Image for subsequent instructions. As such, a valid Dockerfile
     * must have <code>FROM</code> as its first instruction. The image can be any valid image – it is especially easy to
     * start by pulling an image from the Public Repositories.
@@ -309,4 +304,16 @@ public interface DockerDescriptor extends Descriptor
     * @return the current instance of {@link DockerDescriptor}
     */
    DockerDescriptor removeAllComment();
+
+   /**
+    * @return list of all {@link DockerInstruction}
+    */
+   List<DockerInstruction> getInstructions();
+
+   /**
+    * Add an instruction to this {@link DockerDescriptor}
+    * 
+    * @return the current instance of {@link DockerDescriptor}
+    */
+   DockerDescriptor addInstruction(DockerInstruction instruction);
 }

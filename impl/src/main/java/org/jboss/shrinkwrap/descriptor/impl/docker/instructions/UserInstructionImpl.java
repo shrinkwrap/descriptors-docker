@@ -44,4 +44,11 @@ public class UserInstructionImpl extends AbstractDockerInstruction implements Us
    {
       writer.append("USER ").append(name);
    }
+
+   @Override
+   public void read(String line)
+   {
+      name(line.substring(5));
+   }
+
 }

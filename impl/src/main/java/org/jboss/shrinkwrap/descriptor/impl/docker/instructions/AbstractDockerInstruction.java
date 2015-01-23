@@ -36,7 +36,10 @@ public abstract class AbstractDockerInstruction implements DockerInstruction
    public String toString()
    {
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
-      export(new PrintWriter(baos, true));
+      try (PrintWriter writer = new PrintWriter(baos, true))
+      {
+         export(writer);
+      }
       return baos.toString();
    }
 }

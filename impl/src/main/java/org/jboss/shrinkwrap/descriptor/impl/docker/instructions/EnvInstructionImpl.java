@@ -63,7 +63,12 @@ public class EnvInstructionImpl extends AbstractDockerInstruction implements Env
       writer.append(key);
       writer.append(' ');
       writer.append(value);
-
    }
 
+   @Override
+   public void read(String line)
+   {
+      String[] split = line.substring(5).split(" |=");
+      key(split[0]).value(split[1]);
+   }
 }

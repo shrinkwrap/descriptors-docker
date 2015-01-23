@@ -46,4 +46,11 @@ public class OnBuildInstructionImpl extends AbstractDockerInstruction implements
          throw new IllegalStateException("instruction is empty");
       writer.append("ONBUILD ").append(instruction.toString());
    }
+
+   @Override
+   public void read(String line)
+   {
+      DockerInstruction instruction = DockerInstructions.create(line.substring(9), up());
+      instruction(instruction);
+   }
 }
