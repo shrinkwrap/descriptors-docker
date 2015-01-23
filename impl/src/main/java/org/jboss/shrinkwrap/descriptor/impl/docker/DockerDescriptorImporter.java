@@ -54,11 +54,8 @@ public class DockerDescriptorImporter<T extends DockerDescriptor> extends Descri
             String line;
             while ((line = reader.readLine()) != null)
             {
-               if (!line.trim().isEmpty())
-               {
-                  DockerInstruction instruction = DockerInstructions.create(line, descriptor);
-                  descriptor.addInstruction(instruction);
-               }
+               DockerInstruction instruction = DockerInstructions.create(line, descriptor);
+               descriptor.addInstruction(instruction);
             }
          }
          catch (IOException e)
@@ -74,11 +71,8 @@ public class DockerDescriptorImporter<T extends DockerDescriptor> extends Descri
             String line;
             while ((line = reader.readLine()) != null)
             {
-               if (!line.trim().isEmpty())
-               {
-                  DockerInstruction instruction = DockerInstructions.create(line, descriptor);
-                  descriptor.addInstruction(instruction);
-               }
+               DockerInstruction instruction = DockerInstructions.create(line, descriptor);
+               descriptor.addInstruction(instruction);
             }
          }
          catch (IOException e)

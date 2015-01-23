@@ -42,13 +42,15 @@ public class CommentInstructionImpl extends AbstractDockerInstruction implements
    @Override
    public void export(PrintWriter writer)
    {
-      writer.append("#").append(text);
+      if (text != null && !text.isEmpty())
+         writer.append("#").append(text);
    }
 
    @Override
    public void read(String line)
    {
-      text(line.substring(1));
+      int idx = line.startsWith("#") ? 1 : 0;
+      text(line.substring(idx));
    }
 
 }

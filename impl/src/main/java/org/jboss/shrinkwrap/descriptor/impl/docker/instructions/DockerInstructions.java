@@ -32,6 +32,25 @@ import org.jboss.shrinkwrap.descriptor.api.docker.instruction.WorkdirInstruction
 @SuppressWarnings("unchecked")
 public enum DockerInstructions
 {
+   COMMENT("#")
+   {
+      @Override
+      public CommentInstruction create(DockerDescriptor descriptor)
+      {
+         return new CommentInstructionImpl(descriptor);
+      }
+
+      /*
+       * (non-Javadoc)
+       * 
+       * @see org.jboss.shrinkwrap.descriptor.impl.docker.instructions.DockerInstructions#handles(java.lang.String)
+       */
+      @Override
+      public boolean handles(String input)
+      {
+         return input.trim().isEmpty() || input.startsWith("#");
+      }
+   },
    ADD("ADD")
    {
       @Override
@@ -46,14 +65,6 @@ public enum DockerInstructions
       public CmdInstruction create(DockerDescriptor descriptor)
       {
          return new CmdInstructionImpl(descriptor);
-      }
-   },
-   COMMENT("#")
-   {
-      @Override
-      public CommentInstruction create(DockerDescriptor descriptor)
-      {
-         return new CommentInstructionImpl(descriptor);
       }
    },
    COPY("COPY")

@@ -64,4 +64,14 @@ public class DockerDescriptorTest
       Assert.assertEquals("/n", parameters.get(1));
    }
 
+   @Test
+   public void testCommentParsing() throws Exception
+   {
+      String dockerFileContents = "#Awesome\n\nFROM jbossforge\nUSER George\nRUN [\"cmd.exe\",\"/n\"]";
+      DescriptorImporter<DockerDescriptor> importer = Descriptors.importAs(DockerDescriptor.class);
+      DockerDescriptor descriptor = importer.fromString(dockerFileContents);
+      Assert.assertEquals(5, descriptor.getInstructions().size());
+      Assert.assertEquals(dockerFileContents, descriptor.exportAsString());
+   }
+
 }
