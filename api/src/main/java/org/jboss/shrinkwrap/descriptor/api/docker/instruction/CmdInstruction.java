@@ -15,5 +15,7 @@ import java.util.List;
  */
 public interface CmdInstruction extends DockerInstruction
 {
+   CmdInstruction parameters(String... parameters);
+
    List<String> getParameters();
 }

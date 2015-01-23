@@ -36,10 +36,15 @@ public class DockerDescriptorTest
    public void testShrinkWrapDescriptorsFrom()
    {
       DockerDescriptor descriptor = Descriptors.create(DockerDescriptor.class);
-      Assert.assertNotNull(descriptor);
-      assertThat(descriptor, instanceOf(DockerDescriptorImpl.class));
-      descriptor.from("jboss/forge").maintainer("JBoss Forge Team");
+      descriptor.from().name("jbossforge");
+      descriptor.user().name("George");
       assertThat(descriptor.getInstructions().size(), equalTo(2));
+   }
+
+   @Test
+   public void testOnBuildShouldNotAcceptOnBuild()
+   {
+
    }
 
 }

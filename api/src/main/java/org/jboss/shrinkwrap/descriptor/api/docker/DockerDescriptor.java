@@ -12,6 +12,7 @@ import java.util.List;
 import org.jboss.shrinkwrap.descriptor.api.Descriptor;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.AddInstruction;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.CmdInstruction;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.CommentInstruction;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.CopyInstruction;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.DockerInstruction;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.EntrypointInstruction;
@@ -291,4 +292,21 @@ public interface DockerDescriptor extends Descriptor
     * @return the current instance of {@link DockerDescriptor}
     */
    DockerDescriptor removeAllOnBuild();
+
+   /**
+    * Creates a comment instruction
+    */
+   CommentInstruction comment();
+
+   /**
+    * Returns all comments from this {@link DockerDescriptor}
+    */
+   List<CommentInstruction> getAllComment();
+
+   /**
+    * Remove all comments from this {@link DockerDescriptor}
+    * 
+    * @return the current instance of {@link DockerDescriptor}
+    */
+   DockerDescriptor removeAllComment();
 }

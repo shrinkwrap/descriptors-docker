@@ -13,5 +13,7 @@ package org.jboss.shrinkwrap.descriptor.api.docker.instruction;
  */
 public interface VolumeInstruction extends DockerInstruction
 {
+   String getName();
 
+   VolumeInstruction name(String name);
 }

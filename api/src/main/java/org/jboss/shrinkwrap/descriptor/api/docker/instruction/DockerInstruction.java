@@ -17,5 +17,4 @@ import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
  */
 public interface DockerInstruction extends Child<DockerDescriptor>
 {
-
 }

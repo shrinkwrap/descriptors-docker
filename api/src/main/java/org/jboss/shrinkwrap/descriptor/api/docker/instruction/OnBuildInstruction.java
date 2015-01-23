@@ -13,5 +13,7 @@ package org.jboss.shrinkwrap.descriptor.api.docker.instruction;
  */
 public interface OnBuildInstruction extends DockerInstruction
 {
-
+   OnBuildInstruction instruction(DockerInstruction instruction);
+   
+   DockerInstruction getInstruction();
 }

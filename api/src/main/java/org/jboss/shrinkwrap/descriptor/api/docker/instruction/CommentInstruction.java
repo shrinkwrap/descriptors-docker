@@ -7,15 +7,13 @@
 
 package org.jboss.shrinkwrap.descriptor.api.docker.instruction;
 
-import java.util.List;
-
 /**
  * 
  * @author <a href="ggastald@redhat.com">George Gastaldi</a>
  */
-public interface ExposeInstruction extends DockerInstruction
+public interface CommentInstruction extends DockerInstruction
 {
-   ExposeInstruction ports(int... ports);
+   CommentInstruction text(String text);
 
-   List<Integer> getPorts();
+   String getText();
 }

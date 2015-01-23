@@ -13,5 +13,11 @@ package org.jboss.shrinkwrap.descriptor.api.docker.instruction;
  */
 public interface EnvInstruction extends DockerInstruction
 {
+   EnvInstruction key(String key);
 
+   EnvInstruction value(String value);
+
+   String getKey();
+
+   String getValue();
 }

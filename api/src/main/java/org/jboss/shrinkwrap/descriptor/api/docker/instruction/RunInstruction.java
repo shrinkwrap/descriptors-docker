@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface RunInstruction extends DockerInstruction
 {
-   String getCommand();
+   RunInstruction commands(String... commands);
 
-   List<String> getParameters();
+   List<String> getCommands();
 }

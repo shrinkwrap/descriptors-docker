@@ -7,7 +7,6 @@
 
 package org.jboss.shrinkwrap.descriptor.api.docker.instruction;
 
-import java.util.List;
 
 /**
  * 
@@ -15,5 +14,7 @@ import java.util.List;
  */
 public interface EntrypointInstruction extends DockerInstruction
 {
-   List<String> getEntrypoint();
+   EntrypointInstruction name(String entrypoint);
+
+   String getName();
 }

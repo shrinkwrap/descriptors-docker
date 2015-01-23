@@ -13,5 +13,7 @@ package org.jboss.shrinkwrap.descriptor.api.docker.instruction;
  */
 public interface UserInstruction extends DockerInstruction
 {
-   String getUser();
+   String getName();
+
+   UserInstruction name(String name);
 }
