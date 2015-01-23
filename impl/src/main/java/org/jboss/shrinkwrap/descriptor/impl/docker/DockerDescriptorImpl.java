@@ -37,8 +37,8 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
    }
 
    @Override
-   protected DescriptorExporter<DockerDescriptor> getExporter()
+   protected final DescriptorExporter<DockerDescriptor> getExporter()
    {
-      return null;
+      return DockerDescriptorExporter.INSTANCE;
    }
 }

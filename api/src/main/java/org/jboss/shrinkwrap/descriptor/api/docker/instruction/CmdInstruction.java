@@ -5,13 +5,15 @@
  * http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.jboss.shrinkwrap.descriptor.impl.docker;
+package org.jboss.shrinkwrap.descriptor.api.docker.instruction;
+
+import java.util.List;
 
 /**
  * 
  * @author <a href="ggastald@redhat.com">George Gastaldi</a>
  */
-public class DockerDescriptorImporterImpl
+public interface CmdInstruction extends DockerInstruction
 {
-
+   List<String> getParameters();
 }

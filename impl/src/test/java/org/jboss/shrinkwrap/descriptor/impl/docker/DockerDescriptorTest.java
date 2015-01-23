@@ -7,6 +7,7 @@
 
 package org.jboss.shrinkwrap.descriptor.impl.docker;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
@@ -29,6 +30,16 @@ public class DockerDescriptorTest
       DockerDescriptor descriptor = Descriptors.create(DockerDescriptor.class);
       Assert.assertNotNull(descriptor);
       assertThat(descriptor, instanceOf(DockerDescriptorImpl.class));
+   }
+
+   @Test
+   public void testShrinkWrapDescriptorsFrom()
+   {
+      DockerDescriptor descriptor = Descriptors.create(DockerDescriptor.class);
+      Assert.assertNotNull(descriptor);
+      assertThat(descriptor, instanceOf(DockerDescriptorImpl.class));
+      descriptor.from("jboss/forge").maintainer("JBoss Forge Team");
+      assertThat(descriptor.getInstructions().size(), equalTo(2));
    }
 
 }
