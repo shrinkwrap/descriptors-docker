@@ -40,7 +40,7 @@ public class UserInstructionImpl extends AbstractDockerInstruction implements Us
    }
 
    @Override
-   protected void export(PrintWriter writer)
+   public void export(PrintWriter writer)
    {
       writer.append("USER ").append(name);
    }

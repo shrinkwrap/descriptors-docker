@@ -7,6 +7,8 @@
 
 package org.jboss.shrinkwrap.descriptor.impl.docker.instructions;
 
+import java.io.PrintWriter;
+
 import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.FromInstruction;
 
@@ -36,4 +38,11 @@ public class FromInstructionImpl extends AbstractDockerInstruction implements Fr
       return this;
    }
 
+   @Override
+   public void export(PrintWriter writer)
+   {
+      if (name == null || name.isEmpty())
+         throw new IllegalStateException("name is empty or null");
+      writer.append("FROM ").append(name);
+   }
 }

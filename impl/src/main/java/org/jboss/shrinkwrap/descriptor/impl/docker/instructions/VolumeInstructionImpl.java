@@ -7,6 +7,8 @@
 
 package org.jboss.shrinkwrap.descriptor.impl.docker.instructions;
 
+import java.io.PrintWriter;
+
 import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.VolumeInstruction;
 
@@ -16,10 +18,32 @@ import org.jboss.shrinkwrap.descriptor.api.docker.instruction.VolumeInstruction;
  */
 public class VolumeInstructionImpl extends AbstractDockerInstruction implements VolumeInstruction
 {
+   private String name;
+
    public VolumeInstructionImpl(DockerDescriptor descriptor)
    {
       super(descriptor);
-      // TODO Auto-generated constructor stub
+   }
+
+   @Override
+   public String getName()
+   {
+      return name;
+   }
+
+   @Override
+   public VolumeInstruction name(String name)
+   {
+      this.name = name;
+      return this;
+   }
+
+   @Override
+   public void export(PrintWriter writer)
+   {
+      if (name == null || name.isEmpty())
+         throw new IllegalStateException("Name is null or empty");
+      writer.append("VOLUME ").append(name);
    }
 
 }

@@ -7,6 +7,8 @@
 
 package org.jboss.shrinkwrap.descriptor.impl.docker.instructions;
 
+import java.io.PrintWriter;
+
 import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.WorkdirInstruction;
 
@@ -16,6 +18,7 @@ import org.jboss.shrinkwrap.descriptor.api.docker.instruction.WorkdirInstruction
  */
 public class WorkdirInstructionImpl extends AbstractDockerInstruction implements WorkdirInstruction
 {
+   private String path;
 
    public WorkdirInstructionImpl(DockerDescriptor descriptor)
    {
@@ -23,21 +26,24 @@ public class WorkdirInstructionImpl extends AbstractDockerInstruction implements
    }
 
    @Override
-   public String getWorkdir()
+   public String getPath()
    {
-      // TODO Auto-generated method stub
-      return null;
+      return path;
    }
 
-   /*
-    * (non-Javadoc)
-    * 
-    * @see org.jboss.shrinkwrap.descriptor.api.docker.instruction.WorkdirInstruction#setWorkdir()
-    */
    @Override
-   public WorkdirInstruction setWorkdir()
+   public WorkdirInstruction path(String path)
    {
-      return null;
+      this.path = path;
+      return this;
+   }
+
+   @Override
+   public void export(PrintWriter writer)
+   {
+      if (path == null || path.isEmpty())
+         throw new IllegalStateException("Workdir is null or empty");
+      writer.append("WORKDIR ").append(path);
    }
 
 }

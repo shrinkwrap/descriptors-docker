@@ -7,6 +7,8 @@
 
 package org.jboss.shrinkwrap.descriptor.impl.docker.instructions;
 
+import java.io.PrintWriter;
+
 import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.MaintainerInstruction;
 
@@ -38,5 +40,13 @@ public class MaintainerInstructionImpl extends AbstractDockerInstruction impleme
    public String getName()
    {
       return name;
+   }
+
+   @Override
+   public void export(PrintWriter writer)
+   {
+      if (name == null || name.isEmpty())
+         throw new IllegalStateException("name is empty or null");
+      writer.append("MAINTAINER ").append(name);
    }
 }

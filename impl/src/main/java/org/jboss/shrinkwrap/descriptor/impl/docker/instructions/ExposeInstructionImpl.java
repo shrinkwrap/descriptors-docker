@@ -7,6 +7,9 @@
 
 package org.jboss.shrinkwrap.descriptor.impl.docker.instructions;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
@@ -18,6 +21,7 @@ import org.jboss.shrinkwrap.descriptor.api.docker.instruction.ExposeInstruction;
  */
 public class ExposeInstructionImpl extends AbstractDockerInstruction implements ExposeInstruction
 {
+   private List<Integer> ports = new ArrayList<>();
 
    /**
     * @param descriptor
@@ -30,8 +34,31 @@ public class ExposeInstructionImpl extends AbstractDockerInstruction implements 
    @Override
    public List<Integer> getPorts()
    {
-      // TODO Auto-generated method stub
-      return null;
+      return ports;
    }
 
+   @Override
+   public ExposeInstruction ports(Integer... ports)
+   {
+      this.ports.addAll(Arrays.asList(ports));
+      return this;
+   }
+
+   @Override
+   public void export(PrintWriter writer)
+   {
+      if (ports.isEmpty())
+      {
+         throw new IllegalStateException("Ports should not be empty");
+      }
+      writer.append("EXPOSE ");
+      for (int i = 0; i < ports.size(); i++)
+      {
+         writer.append(String.valueOf(ports.get(i)));
+         if (i != ports.size() - 1)
+         {
+            writer.append(' ');
+         }
+      }
+   }
 }

@@ -7,6 +7,8 @@
 
 package org.jboss.shrinkwrap.descriptor.api.docker.instruction;
 
+import java.io.PrintWriter;
+
 import org.jboss.shrinkwrap.descriptor.api.Child;
 import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
 
@@ -17,4 +19,5 @@ import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
  */
 public interface DockerInstruction extends Child<DockerDescriptor>
 {
+   void export(PrintWriter pw); 
 }

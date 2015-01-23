@@ -13,7 +13,7 @@ package org.jboss.shrinkwrap.descriptor.api.docker.instruction;
  */
 public interface WorkdirInstruction extends DockerInstruction
 {
-   String getWorkdir();
+   String getPath();
 
-   WorkdirInstruction setWorkdir();
+   WorkdirInstruction path(String path);
 }

@@ -7,6 +7,9 @@
 
 package org.jboss.shrinkwrap.descriptor.impl.docker.instructions;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
@@ -18,22 +21,51 @@ import org.jboss.shrinkwrap.descriptor.api.docker.instruction.EntrypointInstruct
  */
 public class EntrypointInstructionImpl extends AbstractDockerInstruction implements EntrypointInstruction
 {
+   private List<String> parameters = new ArrayList<>();
 
    public EntrypointInstructionImpl(DockerDescriptor descriptor)
    {
       super(descriptor);
    }
 
-   /*
-    * (non-Javadoc)
-    * 
-    * @see org.jboss.shrinkwrap.descriptor.api.docker.instruction.EntrypointInstruction#getEntrypoint()
-    */
    @Override
-   public List<String> getEntrypoint()
+   public EntrypointInstruction parameters(String... parameters)
    {
-      // TODO Auto-generated method stub
-      return null;
+      this.parameters.addAll(Arrays.asList(parameters));
+      return this;
+   }
+
+   @Override
+   public List<String> getParameters()
+   {
+      return parameters;
+   }
+
+   @Override
+   public void export(PrintWriter writer)
+   {
+      if (parameters.isEmpty())
+      {
+         throw new IllegalStateException("Parameters should not be empty");
+      }
+      writer.append("ENTRYPOINT ");
+      if (parameters.size() > 1)
+      {
+         writer.append("[");
+         for (int i = 0; i < parameters.size(); i++)
+         {
+            writer.append("\"");
+            writer.append(parameters.get(i));
+            writer.append("\"");
+            if (i != parameters.size() - 1)
+               writer.append(",");
+         }
+         writer.append("]");
+      }
+      else
+      {
+         writer.append(parameters.get(0));
+      }
    }
 
 }

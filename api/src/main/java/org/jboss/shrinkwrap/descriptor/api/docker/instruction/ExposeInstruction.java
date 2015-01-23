@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface ExposeInstruction extends DockerInstruction
 {
-   ExposeInstruction ports(int... ports);
+   ExposeInstruction ports(Integer... ports);
 
    List<Integer> getPorts();
 }

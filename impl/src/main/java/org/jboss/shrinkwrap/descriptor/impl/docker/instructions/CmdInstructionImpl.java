@@ -9,6 +9,7 @@ package org.jboss.shrinkwrap.descriptor.impl.docker.instructions;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
@@ -28,6 +29,13 @@ class CmdInstructionImpl extends AbstractDockerInstruction implements CmdInstruc
    }
 
    @Override
+   public CmdInstruction parameters(String... parameters)
+   {
+      this.parameters.addAll(Arrays.asList(parameters));
+      return this;
+   }
+
+   @Override
    public List<String> getParameters()
    {
       return parameters;
@@ -36,6 +44,27 @@ class CmdInstructionImpl extends AbstractDockerInstruction implements CmdInstruc
    @Override
    public void export(PrintWriter writer)
    {
-      // writer.append(getInstruction()).append(parameters);
+      if (parameters.isEmpty())
+      {
+         throw new IllegalStateException("Parameters should not be empty");
+      }
+      writer.append("CMD ");
+      if (parameters.size() > 1)
+      {
+         writer.append("[");
+         for (int i = 0; i < parameters.size(); i++)
+         {
+            writer.append("\"");
+            writer.append(parameters.get(i));
+            writer.append("\"");
+            if (i != parameters.size() - 1)
+               writer.append(",");
+         }
+         writer.append("]");
+      }
+      else
+      {
+         writer.append(parameters.get(0));
+      }
    }
 }

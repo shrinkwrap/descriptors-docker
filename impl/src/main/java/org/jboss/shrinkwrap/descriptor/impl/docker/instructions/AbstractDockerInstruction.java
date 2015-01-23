@@ -39,6 +39,4 @@ public abstract class AbstractDockerInstruction implements DockerInstruction
       export(new PrintWriter(baos, true));
       return baos.toString();
    }
-
-   protected abstract void export(PrintWriter writer);
 }

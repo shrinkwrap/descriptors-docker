@@ -60,7 +60,7 @@ public class CopyInstructionImpl extends AbstractDockerInstruction implements Co
          throw new IllegalStateException("Source is null or empty");
       if (destination == null || destination.isEmpty())
          throw new IllegalStateException("Destination is null or empty");
-      writer.append("ADD ").append(source).append(" ").append(destination);
+      writer.append("COPY ").append(source).append(" ").append(destination);
    }
 
 }

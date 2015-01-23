@@ -7,7 +7,10 @@
 
 package org.jboss.shrinkwrap.descriptor.impl.docker.instructions;
 
+import java.io.PrintWriter;
+
 import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.docker.instruction.DockerInstruction;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.OnBuildInstruction;
 
 /**
@@ -16,10 +19,31 @@ import org.jboss.shrinkwrap.descriptor.api.docker.instruction.OnBuildInstruction
  */
 public class OnBuildInstructionImpl extends AbstractDockerInstruction implements OnBuildInstruction
 {
+   private DockerInstruction instruction;
+
    public OnBuildInstructionImpl(DockerDescriptor descriptor)
    {
       super(descriptor);
-      // TODO Auto-generated constructor stub
    }
 
+   @Override
+   public OnBuildInstruction instruction(DockerInstruction instruction)
+   {
+      this.instruction = instruction;
+      return this;
+   }
+
+   @Override
+   public DockerInstruction getInstruction()
+   {
+      return instruction;
+   }
+
+   @Override
+   public void export(PrintWriter writer)
+   {
+      if (instruction == null)
+         throw new IllegalStateException("instruction is empty");
+      writer.append("ONBUILD ").append(instruction.toString());
+   }
 }

@@ -7,6 +7,8 @@
 
 package org.jboss.shrinkwrap.descriptor.impl.docker.instructions;
 
+import java.io.PrintWriter;
+
 import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.EnvInstruction;
 
@@ -16,14 +18,52 @@ import org.jboss.shrinkwrap.descriptor.api.docker.instruction.EnvInstruction;
  */
 public class EnvInstructionImpl extends AbstractDockerInstruction implements EnvInstruction
 {
+   private String key;
+   private String value;
 
-   /**
-    * @param descriptor
-    */
    public EnvInstructionImpl(DockerDescriptor descriptor)
    {
       super(descriptor);
-      // TODO Auto-generated constructor stub
+   }
+
+   @Override
+   public EnvInstruction key(String key)
+   {
+      this.key = key;
+      return this;
+   }
+
+   @Override
+   public EnvInstruction value(String value)
+   {
+      this.value = value;
+      return this;
+   }
+
+   @Override
+   public String getKey()
+   {
+      return key;
+   }
+
+   @Override
+   public String getValue()
+   {
+      return value;
+   }
+
+   @Override
+   public void export(PrintWriter writer)
+   {
+      if (key == null || key.isEmpty())
+         throw new IllegalStateException("key is null or empty");
+      if (value == null || value.isEmpty())
+         throw new IllegalStateException("value is null or empty");
+      writer.append("ENV ");
+      writer.append(key);
+      writer.append(' ');
+      writer.append(value);
+
    }
 
 }

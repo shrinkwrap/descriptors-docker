@@ -7,6 +7,9 @@
 
 package org.jboss.shrinkwrap.descriptor.impl.docker.instructions;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
@@ -18,26 +21,51 @@ import org.jboss.shrinkwrap.descriptor.api.docker.instruction.RunInstruction;
  */
 public class RunInstructionImpl extends AbstractDockerInstruction implements RunInstruction
 {
+   private List<String> parameters = new ArrayList<>();
 
-   /**
-    * @param descriptor
-    */
    public RunInstructionImpl(DockerDescriptor descriptor)
    {
       super(descriptor);
    }
 
    @Override
-   public String getCommand()
+   public List<String> getParameters()
    {
-      return null;
+      return parameters;
    }
 
    @Override
-   public List<String> getParameters()
+   public RunInstruction parameters(String... commands)
    {
-      // TODO Auto-generated method stub
-      return null;
+      parameters.addAll(Arrays.asList(commands));
+      return this;
+   }
+
+   @Override
+   public void export(PrintWriter writer)
+   {
+      if (parameters.isEmpty())
+      {
+         throw new IllegalStateException("Parameters should not be empty");
+      }
+      writer.append("RUN ");
+      if (parameters.size() > 1)
+      {
+         writer.append("[");
+         for (int i = 0; i < parameters.size(); i++)
+         {
+            writer.append("\"");
+            writer.append(parameters.get(i));
+            writer.append("\"");
+            if (i != parameters.size() - 1)
+               writer.append(",");
+         }
+         writer.append("]");
+      }
+      else
+      {
+         writer.append(parameters.get(0));
+      }
    }
 
 }
