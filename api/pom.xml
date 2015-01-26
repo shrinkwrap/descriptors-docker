@@ -8,7 +8,7 @@
       <relativePath>../pom.xml</relativePath>
    </parent>
    <artifactId>shrinkwrap-descriptors-api-docker</artifactId>
-   <name>Docker Descriptors :: API</name>
+   <name>ShrinkWrap Descriptors Docker :: API</name>
    <dependencies>
       <dependency>
          <groupId>org.jboss.shrinkwrap.descriptors</groupId>

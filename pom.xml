@@ -10,7 +10,7 @@
    <artifactId>docker-descriptors-parent-docker</artifactId>
    <version>0.0.1-SNAPSHOT</version>
    <packaging>pom</packaging>
-   <name>Docker Descriptors :: Parent Docker</name>
+   <name>ShrinkWrap Descriptors Docker :: Parent</name>
    <modules>
       <module>api</module>
       <module>impl</module>
