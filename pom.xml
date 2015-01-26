@@ -6,11 +6,11 @@
       <version>16</version>
    </parent>
    <modelVersion>4.0.0</modelVersion>
-   <groupId>br.net.gastaldi.docker</groupId>
-   <artifactId>docker-descriptors-parent</artifactId>
+   <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+   <artifactId>docker-descriptors-parent-docker</artifactId>
    <version>0.0.1-SNAPSHOT</version>
    <packaging>pom</packaging>
-   <name>Docker Descriptors :: Parent</name>
+   <name>Docker Descriptors :: Parent Docker</name>
    <modules>
       <module>api</module>
       <module>impl</module>
@@ -37,13 +37,13 @@
    <dependencyManagement>
       <dependencies>
          <dependency>
-            <groupId>br.net.gastaldi.docker</groupId>
-            <artifactId>docker-descriptors-api</artifactId>
+            <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+            <artifactId>shrinkwrap-descriptors-api-docker</artifactId>
             <version>${project.version}</version>
          </dependency>
          <dependency>
-            <groupId>br.net.gastaldi.docker</groupId>
-            <artifactId>docker-descriptors</artifactId>
+            <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+            <artifactId>shrinkwrap-descriptors-impl-docker</artifactId>
             <version>${project.version}</version>
          </dependency>
          <dependency>
@@ -56,9 +56,8 @@
       </dependencies>
    </dependencyManagement>
    <scm>
-      <connection>scm:git:git://github.com/gastaldi/docker-descriptors.git</connection>
-      <developerConnection>scm:git:git@github.com:gastaldi/docker-descriptors.git</developerConnection>
-      <url>http://github.com/gastaldi/docker-descriptors</url>
-      <tag>HEAD</tag>
+      <connection>scm:git:git://github.com/shrinkwrap/descriptors-docker.git</connection>
+      <developerConnection>scm:git:git@github.com:shrinkwrap/descriptors-docker.git</developerConnection>
+      <url>http://github.com/shrinkwrap/descriptors-docker</url>
    </scm>
 </project>

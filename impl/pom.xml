@@ -2,15 +2,17 @@
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
    <modelVersion>4.0.0</modelVersion>
    <parent>
-      <groupId>br.net.gastaldi.docker</groupId>
-      <artifactId>docker-descriptors-parent</artifactId>
+      <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+      <artifactId>docker-descriptors-parent-docker</artifactId>
       <version>0.0.1-SNAPSHOT</version>
+      <relativePath>../pom.xml</relativePath>
    </parent>
-   <artifactId>docker-descriptors</artifactId>
+   <artifactId>shrinkwrap-descriptors-impl-docker</artifactId>
+   <name>Docker Descriptors :: Impl</name>
    <dependencies>
       <dependency>
-         <groupId>br.net.gastaldi.docker</groupId>
-         <artifactId>docker-descriptors-api</artifactId>
+         <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+         <artifactId>shrinkwrap-descriptors-api-docker</artifactId>
       </dependency>
       <dependency>
          <groupId>org.jboss.shrinkwrap.descriptors</groupId>
