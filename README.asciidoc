@@ -1,14 +1,18 @@
 == descriptors-docker
 A ShrinkWrap Descriptors implementation for Dockerfiles
 
+[source, java]
+----
+DockerDescriptor descriptor = Descriptors.create(DockerDescriptor.class);
+descriptor.from().name("jbossforge");
+descriptor.user().name("George");
+System.out.println(descriptor.exportAsString());
+----
 
-       DockerDescriptor descriptor = Descriptors.create(DockerDescriptor.class);
-       descriptor.from().name("jbossforge");
-       descriptor.user().name("George");
-       System.out.println(descriptor.exportAsString());
-       
 Yields the following output:
 
-      FROM jbossforge
-      USER George
-      
+[source, Dockerfile]
+----
+FROM jbossforge
+USER George
+----
