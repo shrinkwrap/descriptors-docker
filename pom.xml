@@ -6,7 +6,7 @@
    </parent>
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.jboss.shrinkwrap.descriptors</groupId>
-   <artifactId>docker-descriptors-parent-docker</artifactId>
+   <artifactId>shrinkwrap-descriptors-parent-docker</artifactId>
    <version>1.0.0-SNAPSHOT</version>
    <packaging>pom</packaging>
    <name>ShrinkWrap Descriptors Docker :: Parent</name>
