@@ -35,7 +35,7 @@ import org.jboss.shrinkwrap.descriptor.api.docker.instruction.WorkdirInstruction
 
 /**
  * This deployment descriptor provides the functionalities as described in the
- * <p/>
+ * 
  * <a href="https://docs.docker.com/reference/builder/">Dockerfile Reference</a>
  * 
  * @author <a href="ggastald@redhat.com">George Gastaldi</a>
@@ -120,7 +120,7 @@ public interface DockerDescriptor extends Descriptor
     * The <code>EXPOSE</code> instructions informs Docker that the container will listen on the specified network ports
     * at runtime. Docker uses this information to interconnect containers using links (see the Docker User Guide) and to
     * determine which ports to expose to the host when using the -P flag.
-    * <p/>
+    * 
     * Note: <code>EXPOSE</code> doesn't define which ports can be exposed to the host or make ports accessible from the
     * host by default. To expose ports to the host, at runtime, use the -p flag or the -P flag.
     * 
@@ -296,12 +296,12 @@ public interface DockerDescriptor extends Descriptor
    DockerDescriptor removeAllOnBuild();
 
    /**
-    * Creates a comment instruction
+    * @return a new {@link CommentInstruction}
     */
    CommentInstruction comment();
 
    /**
-    * Returns all comments from this {@link DockerDescriptor}
+    * @return all comments from this {@link DockerDescriptor}
     */
    List<CommentInstruction> getAllComment();
 
@@ -320,6 +320,7 @@ public interface DockerDescriptor extends Descriptor
    /**
     * Add an instruction to this {@link DockerDescriptor}
     * 
+    * @param instruction the instruction to be added
     * @return the current instance of {@link DockerDescriptor}
     */
    DockerDescriptor addInstruction(DockerInstruction instruction);
