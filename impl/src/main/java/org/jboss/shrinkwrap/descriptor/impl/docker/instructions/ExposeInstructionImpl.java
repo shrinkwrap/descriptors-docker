@@ -23,6 +23,7 @@ import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.ExposeInstruction;
 
 /**
+ * {@link ExposeInstruction} implementation
  * 
  * @author <a href="ggastald@redhat.com">George Gastaldi</a>
  */
@@ -30,9 +31,6 @@ public class ExposeInstructionImpl extends AbstractDockerInstruction implements 
 {
    private List<Integer> ports = new ArrayList<>();
 
-   /**
-    * @param descriptor
-    */
    public ExposeInstructionImpl(DockerDescriptor descriptor)
    {
       super(descriptor);

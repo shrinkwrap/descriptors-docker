@@ -20,6 +20,7 @@ import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.MaintainerInstruction;
 
 /**
+ * {@link MaintainerInstruction} implementation
  * 
  * @author <a href="ggastald@redhat.com">George Gastaldi</a>
  */
@@ -28,9 +29,6 @@ public class MaintainerInstructionImpl extends AbstractDockerInstruction impleme
 
    private String name;
 
-   /**
-    * @param descriptor
-    */
    public MaintainerInstructionImpl(DockerDescriptor descriptor)
    {
       super(descriptor);

@@ -28,6 +28,7 @@ import org.jboss.shrinkwrap.descriptor.impl.docker.instructions.DockerInstructio
 import org.jboss.shrinkwrap.descriptor.spi.DescriptorImporterBase;
 
 /**
+ * {@link DescriptorImporter} implementation for {@link DockerDescriptor}s
  * 
  * @author <a href="ggastald@redhat.com">George Gastaldi</a>
  */
@@ -38,9 +39,9 @@ public class DockerDescriptorImporter<T extends DockerDescriptor> extends Descri
    /**
     * Creates a new instance representing the specified backing model type
     *
-    * @param The type of the backing object model for the descriptor
-    * @throws IllegalArgumentException If the model type is not specified
-    * @throws IllegalArgumentException If the descriptorName not specified
+    * @param endUserViewImplType The type of the backing object model for the descriptor
+    * @param descriptorName the descriptor name (usually Dockerfile)
+    * @throws IllegalArgumentException If the model type is not specified or if the descriptorName is not specified
     */
    public DockerDescriptorImporter(final Class<T> endUserViewImplType,
             final String descriptorName)

@@ -23,6 +23,7 @@ import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.EntrypointInstruction;
 
 /**
+ * {@link EntrypointInstruction} implementation
  * 
  * @author <a href="ggastald@redhat.com">George Gastaldi</a>
  */
