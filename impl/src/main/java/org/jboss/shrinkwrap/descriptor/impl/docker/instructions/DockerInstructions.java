@@ -37,272 +37,272 @@ import org.jboss.shrinkwrap.descriptor.api.docker.instruction.WorkdirInstruction
 public enum DockerInstructions
 {
 
-    COMMENT("#")
-            {
-                @Override
-                public CommentInstruction create(DockerDescriptor descriptor)
-                {
-                    return new CommentInstructionImpl(descriptor);
-                }
+   COMMENT("#")
+   {
+      @Override
+      public CommentInstruction create(DockerDescriptor descriptor)
+      {
+         return new CommentInstructionImpl(descriptor);
+      }
 
-                @Override
-                public boolean handles(String input)
-                {
-                    return input.trim().isEmpty() || input.startsWith("#");
-                }
+      @Override
+      public boolean handles(String input)
+      {
+         return input.trim().isEmpty() || input.startsWith("#");
+      }
 
-                @Override
-                public Class<CommentInstruction> getInstructionClass()
-                {
-                    return CommentInstruction.class;
-                }
-            },
-    ADD("ADD")
-            {
-                @Override
-                public AddInstruction create(DockerDescriptor descriptor)
-                {
-                    return new AddInstructionImpl(descriptor);
-                }
+      @Override
+      public Class<CommentInstruction> getInstructionClass()
+      {
+         return CommentInstruction.class;
+      }
+   },
+   ADD("ADD")
+   {
+      @Override
+      public AddInstruction create(DockerDescriptor descriptor)
+      {
+         return new AddInstructionImpl(descriptor);
+      }
 
-                @Override
-                public Class<AddInstruction> getInstructionClass()
-                {
-                    return AddInstruction.class;
-                }
-            },
-    CMD("CMD")
-            {
-                @Override
-                public CmdInstruction create(DockerDescriptor descriptor)
-                {
-                    return new CmdInstructionImpl(descriptor);
-                }
+      @Override
+      public Class<AddInstruction> getInstructionClass()
+      {
+         return AddInstruction.class;
+      }
+   },
+   CMD("CMD")
+   {
+      @Override
+      public CmdInstruction create(DockerDescriptor descriptor)
+      {
+         return new CmdInstructionImpl(descriptor);
+      }
 
-                @Override
-                public Class<CmdInstruction> getInstructionClass()
-                {
-                    return CmdInstruction.class;
-                }
-            },
-    COPY("COPY")
-            {
-                @Override
-                public CopyInstruction create(DockerDescriptor descriptor)
-                {
-                    return new CopyInstructionImpl(descriptor);
-                }
+      @Override
+      public Class<CmdInstruction> getInstructionClass()
+      {
+         return CmdInstruction.class;
+      }
+   },
+   COPY("COPY")
+   {
+      @Override
+      public CopyInstruction create(DockerDescriptor descriptor)
+      {
+         return new CopyInstructionImpl(descriptor);
+      }
 
-                @Override
-                public Class<CopyInstruction> getInstructionClass()
-                {
-                    return CopyInstruction.class;
-                }
+      @Override
+      public Class<CopyInstruction> getInstructionClass()
+      {
+         return CopyInstruction.class;
+      }
 
-            },
-    ENTRYPOINT("ENTRYPOINT")
-            {
-                @Override
-                public EntrypointInstruction create(DockerDescriptor descriptor)
-                {
-                    return new EntrypointInstructionImpl(descriptor);
-                }
+   },
+   ENTRYPOINT("ENTRYPOINT")
+   {
+      @Override
+      public EntrypointInstruction create(DockerDescriptor descriptor)
+      {
+         return new EntrypointInstructionImpl(descriptor);
+      }
 
-                @Override
-                public Class<EntrypointInstruction> getInstructionClass()
-                {
-                    return EntrypointInstruction.class;
-                }
+      @Override
+      public Class<EntrypointInstruction> getInstructionClass()
+      {
+         return EntrypointInstruction.class;
+      }
 
-            },
-    ENV("ENV")
-            {
-                @Override
-                public EnvInstruction create(DockerDescriptor descriptor)
-                {
-                    return new EnvInstructionImpl(descriptor);
-                }
+   },
+   ENV("ENV")
+   {
+      @Override
+      public EnvInstruction create(DockerDescriptor descriptor)
+      {
+         return new EnvInstructionImpl(descriptor);
+      }
 
-                @Override
-                public Class<EnvInstruction> getInstructionClass()
-                {
-                    return EnvInstruction.class;
-                }
+      @Override
+      public Class<EnvInstruction> getInstructionClass()
+      {
+         return EnvInstruction.class;
+      }
 
-            },
-    EXPOSE("EXPOSE")
-            {
-                @Override
-                public ExposeInstruction create(DockerDescriptor descriptor)
-                {
-                    return new ExposeInstructionImpl(descriptor);
-                }
+   },
+   EXPOSE("EXPOSE")
+   {
+      @Override
+      public ExposeInstruction create(DockerDescriptor descriptor)
+      {
+         return new ExposeInstructionImpl(descriptor);
+      }
 
-                @Override
-                public Class<ExposeInstruction> getInstructionClass()
-                {
-                    return ExposeInstruction.class;
-                }
+      @Override
+      public Class<ExposeInstruction> getInstructionClass()
+      {
+         return ExposeInstruction.class;
+      }
 
-            },
-    FROM("FROM")
-            {
-                @Override
-                public FromInstruction create(DockerDescriptor descriptor)
-                {
-                    return new FromInstructionImpl(descriptor);
-                }
+   },
+   FROM("FROM")
+   {
+      @Override
+      public FromInstruction create(DockerDescriptor descriptor)
+      {
+         return new FromInstructionImpl(descriptor);
+      }
 
-                @Override
-                public Class<FromInstruction> getInstructionClass()
-                {
-                    return FromInstruction.class;
-                }
+      @Override
+      public Class<FromInstruction> getInstructionClass()
+      {
+         return FromInstruction.class;
+      }
 
-            },
-    MAINTAINER("MAINTAINER")
-            {
-                @Override
-                public MaintainerInstruction create(DockerDescriptor descriptor)
-                {
-                    return new MaintainerInstructionImpl(descriptor);
-                }
+   },
+   MAINTAINER("MAINTAINER")
+   {
+      @Override
+      public MaintainerInstruction create(DockerDescriptor descriptor)
+      {
+         return new MaintainerInstructionImpl(descriptor);
+      }
 
-                @Override
-                public Class<MaintainerInstruction> getInstructionClass()
-                {
-                    return MaintainerInstruction.class;
-                }
+      @Override
+      public Class<MaintainerInstruction> getInstructionClass()
+      {
+         return MaintainerInstruction.class;
+      }
 
-            },
-    ONBUILD("ONBUILD")
-            {
-                @Override
-                public OnBuildInstruction create(DockerDescriptor descriptor)
-                {
-                    return new OnBuildInstructionImpl(descriptor);
-                }
+   },
+   ONBUILD("ONBUILD")
+   {
+      @Override
+      public OnBuildInstruction create(DockerDescriptor descriptor)
+      {
+         return new OnBuildInstructionImpl(descriptor);
+      }
 
-                @Override
-                public Class<OnBuildInstruction> getInstructionClass()
-                {
-                    return OnBuildInstruction.class;
-                }
+      @Override
+      public Class<OnBuildInstruction> getInstructionClass()
+      {
+         return OnBuildInstruction.class;
+      }
 
-            },
-    RUN("RUN")
-            {
-                @Override
-                public RunInstruction create(DockerDescriptor descriptor)
-                {
-                    return new RunInstructionImpl(descriptor);
-                }
+   },
+   RUN("RUN")
+   {
+      @Override
+      public RunInstruction create(DockerDescriptor descriptor)
+      {
+         return new RunInstructionImpl(descriptor);
+      }
 
-                @Override
-                public Class<RunInstruction> getInstructionClass()
-                {
-                    return RunInstruction.class;
-                }
+      @Override
+      public Class<RunInstruction> getInstructionClass()
+      {
+         return RunInstruction.class;
+      }
 
-            },
-    USER("USER")
-            {
-                @Override
-                public UserInstruction create(DockerDescriptor descriptor)
-                {
-                    return new UserInstructionImpl(descriptor);
-                }
+   },
+   USER("USER")
+   {
+      @Override
+      public UserInstruction create(DockerDescriptor descriptor)
+      {
+         return new UserInstructionImpl(descriptor);
+      }
 
-                @Override
-                public Class<UserInstruction> getInstructionClass()
-                {
-                    return UserInstruction.class;
-                }
+      @Override
+      public Class<UserInstruction> getInstructionClass()
+      {
+         return UserInstruction.class;
+      }
 
-            },
-    VOLUME("VOLUME")
-            {
-                @Override
-                public VolumeInstruction create(DockerDescriptor descriptor)
-                {
-                    return new VolumeInstructionImpl(descriptor);
-                }
+   },
+   VOLUME("VOLUME")
+   {
+      @Override
+      public VolumeInstruction create(DockerDescriptor descriptor)
+      {
+         return new VolumeInstructionImpl(descriptor);
+      }
 
-                @Override
-                public Class<VolumeInstruction> getInstructionClass()
-                {
-                    return VolumeInstruction.class;
-                }
+      @Override
+      public Class<VolumeInstruction> getInstructionClass()
+      {
+         return VolumeInstruction.class;
+      }
 
-            },
-    WORKDIR("WORKDIR")
-            {
-                @Override
-                public WorkdirInstruction create(DockerDescriptor descriptor)
-                {
-                    return new WorkdirInstructionImpl(descriptor);
-                }
+   },
+   WORKDIR("WORKDIR")
+   {
+      @Override
+      public WorkdirInstruction create(DockerDescriptor descriptor)
+      {
+         return new WorkdirInstructionImpl(descriptor);
+      }
 
-                @Override
-                public Class<WorkdirInstruction> getInstructionClass()
-                {
-                    return WorkdirInstruction.class;
-                }
+      @Override
+      public Class<WorkdirInstruction> getInstructionClass()
+      {
+         return WorkdirInstruction.class;
+      }
 
-            };
+   };
 
-    private final String instruction;
+   private final String instruction;
 
-    private DockerInstructions(String instruction)
-    {
-        this.instruction = instruction;
-    }
+   private DockerInstructions(String instruction)
+   {
+      this.instruction = instruction;
+   }
 
-    public abstract <T extends DockerInstruction> T create(DockerDescriptor descriptor);
+   public abstract <T extends DockerInstruction> T create(DockerDescriptor descriptor);
 
-    public abstract <T extends DockerInstruction> Class<T> getInstructionClass();
+   public abstract <T extends DockerInstruction> Class<T> getInstructionClass();
 
-    public static DockerInstructions from(Class<? extends DockerInstruction> instructionClass)
-    {
-        if (instructionClass == null)
-        {
-            throw new IllegalArgumentException("Instruction class cannot be null");
-        }
-        for (DockerInstructions inst : values())
-        {
-            if (inst.getInstructionClass().isAssignableFrom(instructionClass))
-            {
-                return inst;
-            }
-        }
-        throw new IllegalArgumentException("Instruction class not supported: " + instructionClass.getName());
-    }
+   public static DockerInstructions from(Class<? extends DockerInstruction> instructionClass)
+   {
+      if (instructionClass == null)
+      {
+         throw new IllegalArgumentException("Instruction class cannot be null");
+      }
+      for (DockerInstructions inst : values())
+      {
+         if (inst.getInstructionClass().isAssignableFrom(instructionClass))
+         {
+            return inst;
+         }
+      }
+      throw new IllegalArgumentException("Instruction class not supported: " + instructionClass.getName());
+   }
 
-    public static DockerInstruction create(String input, DockerDescriptor descriptor)
-    {
-        for (DockerInstructions inst : values())
-        {
-            if (inst.handles(input))
-            {
-                DockerInstruction create = inst.create(descriptor);
-                create.read(input);
-                return create;
-            }
-        }
-        throw new IllegalArgumentException("Input not recognized: " + input);
-    }
+   public static DockerInstruction create(String input, DockerDescriptor descriptor)
+   {
+      for (DockerInstructions inst : values())
+      {
+         if (inst.handles(input))
+         {
+            DockerInstruction create = inst.create(descriptor);
+            create.read(input);
+            return create;
+         }
+      }
+      throw new IllegalArgumentException("Input not recognized: " + input);
+   }
 
-    public boolean handles(String input)
-    {
-        return input.toUpperCase().startsWith(getInstruction());
-    }
+   public boolean handles(String input)
+   {
+      return input.toUpperCase().startsWith(getInstruction());
+   }
 
-    /**
-     * @return the instruction
-     */
-    public String getInstruction()
-    {
-        return instruction;
-    }
+   /**
+    * @return the instruction
+    */
+   public String getInstruction()
+   {
+      return instruction;
+   }
 
 }

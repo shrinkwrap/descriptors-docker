@@ -24,48 +24,48 @@ import org.jboss.shrinkwrap.descriptor.api.docker.instruction.OnBuildInstruction
 public class OnBuildInstructionImpl extends AbstractDockerInstruction implements OnBuildInstruction
 {
 
-    private DockerInstruction instruction;
+   private DockerInstruction instruction;
 
-    public OnBuildInstructionImpl(DockerDescriptor descriptor)
-    {
-        super(descriptor);
-    }
+   public OnBuildInstructionImpl(DockerDescriptor descriptor)
+   {
+      super(descriptor);
+   }
 
-    @Override
-    public <T extends DockerInstruction> T instruction(Class<T> instruction)
-    {
-        if (instruction == OnBuildInstruction.class) 
-            throw new IllegalArgumentException("Cannot use nested ONBUILD instructions");
-        DockerInstructions instructionEnum = DockerInstructions.from(instruction);
-        this.instruction = instructionEnum.create(up());
-        return (T) this.instruction;
-    }
+   @Override
+   public <T extends DockerInstruction> T instruction(Class<T> instruction)
+   {
+      if (instruction == OnBuildInstruction.class)
+         throw new IllegalArgumentException("Cannot use nested ONBUILD instructions");
+      DockerInstructions instructionEnum = DockerInstructions.from(instruction);
+      this.instruction = instructionEnum.create(up());
+      return (T) this.instruction;
+   }
 
-    public void setInstruction(DockerInstruction instruction)
-    {
-        this.instruction = instruction;
-    }
+   public void setInstruction(DockerInstruction instruction)
+   {
+      this.instruction = instruction;
+   }
 
-    @Override
-    public DockerInstruction getInstruction()
-    {
-        return instruction;
-    }
+   @Override
+   public DockerInstruction getInstruction()
+   {
+      return instruction;
+   }
 
-    @Override
-    public void export(PrintWriter writer)
-    {
-        if (instruction == null)
-        {
-            throw new IllegalStateException("instruction is empty");
-        }
-        writer.append("ONBUILD ").append(instruction.toString());
-    }
+   @Override
+   public void export(PrintWriter writer)
+   {
+      if (instruction == null)
+      {
+         throw new IllegalStateException("instruction is empty");
+      }
+      writer.append("ONBUILD ").append(instruction.toString());
+   }
 
-    @Override
-    public void read(String line)
-    {
-        DockerInstruction instruction = DockerInstructions.create(line.substring(9), up());
-        setInstruction(instruction);
-    }
+   @Override
+   public void read(String line)
+   {
+      DockerInstruction instruction = DockerInstructions.create(line.substring(9), up());
+      setInstruction(instruction);
+   }
 }

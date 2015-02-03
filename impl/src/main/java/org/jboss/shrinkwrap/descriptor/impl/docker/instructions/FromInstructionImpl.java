@@ -52,7 +52,7 @@ public class FromInstructionImpl extends AbstractDockerInstruction implements Fr
          throw new IllegalStateException("name is empty or null");
       writer.append("FROM ").append(name);
    }
-   
+
    @Override
    public void read(String line)
    {
