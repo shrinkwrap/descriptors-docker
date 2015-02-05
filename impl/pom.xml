@@ -3,7 +3,7 @@
    <parent>
       <groupId>org.jboss.shrinkwrap.descriptors</groupId>
       <artifactId>shrinkwrap-descriptors-parent-docker</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.0.0-alpha-2</version>
       <relativePath>../pom.xml</relativePath>
    </parent>
    <artifactId>shrinkwrap-descriptors-impl-docker</artifactId>
