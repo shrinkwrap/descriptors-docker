@@ -90,6 +90,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
    }
 
    @Override
+   public DockerDescriptor from(String name)
+   {
+      return from().name(name).up();
+   }
+
+   @Override
    public FromInstruction getFrom()
    {
       return findFirst(FromInstruction.class);
@@ -105,6 +111,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
          instructions.add(maintainer);
       }
       return maintainer;
+   }
+
+   @Override
+   public DockerDescriptor maintainer(String name)
+   {
+      return maintainer().name(name).up();
    }
 
    @Override
@@ -126,6 +138,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
       RunInstruction run = DockerInstructions.RUN.create(this);
       instructions.add(run);
       return run;
+   }
+
+   @Override
+   public DockerDescriptor run(String... parameters)
+   {
+      return run().parameters(parameters).up();
    }
 
    @Override
@@ -154,6 +172,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
    }
 
    @Override
+   public DockerDescriptor cmd(String... parameters)
+   {
+      return cmd().parameters(parameters).up();
+   }
+
+   @Override
    public CmdInstruction getCmd()
    {
       return findFirst(CmdInstruction.class);
@@ -172,6 +196,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
       ExposeInstruction expose = DockerInstructions.EXPOSE.create(this);
       instructions.add(expose);
       return expose;
+   }
+
+   @Override
+   public DockerDescriptor expose(Integer... ports)
+   {
+      return expose().ports(ports).up();
    }
 
    @Override
@@ -196,6 +226,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
    }
 
    @Override
+   public DockerDescriptor env(String key, String value)
+   {
+      return env().key(key).value(value).up();
+   }
+
+   @Override
    public List<EnvInstruction> getAllEnv()
    {
       return findAll(EnvInstruction.class);
@@ -217,6 +253,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
    }
 
    @Override
+   public DockerDescriptor add(String source, String destination)
+   {
+      return add().source(source).destination(destination).up();
+   }
+
+   @Override
    public List<AddInstruction> getAllAdd()
    {
       return findAll(AddInstruction.class);
@@ -235,6 +277,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
       CopyInstruction copy = DockerInstructions.COPY.create(this);
       instructions.add(copy);
       return copy;
+   }
+
+   @Override
+   public DockerDescriptor copy(String source, String destination)
+   {
+      return copy().source(source).destination(destination).up();
    }
 
    @Override
@@ -263,6 +311,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
    }
 
    @Override
+   public DockerDescriptor entrypoint(String... parameters)
+   {
+      return entrypoint().parameters(parameters).up();
+   }
+
+   @Override
    public EntrypointInstruction getEntrypoint()
    {
       return findFirst(EntrypointInstruction.class);
@@ -274,6 +328,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
       VolumeInstruction volume = DockerInstructions.VOLUME.create(this);
       instructions.add(volume);
       return volume;
+   }
+
+   @Override
+   public DockerDescriptor volume(String name)
+   {
+      return volume().name(name).up();
    }
 
    @Override
@@ -302,6 +362,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
    }
 
    @Override
+   public DockerDescriptor user(String name)
+   {
+      return user().name(name).up();
+   }
+
+   @Override
    public UserInstruction getUser()
    {
       return findFirst(UserInstruction.class);
@@ -320,6 +386,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
       WorkdirInstruction workdir = DockerInstructions.WORKDIR.create(this);
       instructions.add(workdir);
       return workdir;
+   }
+
+   @Override
+   public DockerDescriptor workDir(String path)
+   {
+      return workDir().path(path).up();
    }
 
    @Override
@@ -344,6 +416,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
    }
 
    @Override
+   public <T extends DockerInstruction> T onBuild(Class<T> instruction)
+   {
+      return onBuild().instruction(instruction);
+   }
+
+   @Override
    public List<OnBuildInstruction> getAllOnBuild()
    {
       return findAll(OnBuildInstruction.class);
@@ -362,6 +440,12 @@ public class DockerDescriptorImpl extends DescriptorImplBase<DockerDescriptor> i
       CommentInstruction comment = DockerInstructions.COMMENT.create(this);
       instructions.add(comment);
       return comment;
+   }
+
+   @Override
+   public DockerDescriptor comment(String comment)
+   {
+      return comment().text(comment).up();
    }
 
    @Override

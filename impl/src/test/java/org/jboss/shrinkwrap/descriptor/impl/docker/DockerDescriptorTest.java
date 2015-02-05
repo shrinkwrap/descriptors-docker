@@ -13,14 +13,13 @@ package org.jboss.shrinkwrap.descriptor.impl.docker;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
 import org.jboss.shrinkwrap.descriptor.api.DescriptorImporter;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.docker.DockerDescriptor;
-import org.jboss.shrinkwrap.descriptor.api.docker.instruction.FromInstruction;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.OnBuildInstruction;
 import org.jboss.shrinkwrap.descriptor.api.docker.instruction.RunInstruction;
 import org.junit.Assert;
@@ -51,6 +50,16 @@ public class DockerDescriptorTest
       assertThat(descriptor.getInstructions().size(), equalTo(2));
       String output = descriptor.exportAsString();
       Assert.assertEquals("FROM jbossforge\nUSER George", output);
+   }
+
+   @Test
+   public void testSimpleInstructions()
+   {
+      DockerDescriptor descriptor = Descriptors.create(DockerDescriptor.class);
+      descriptor.from("jbossforge").maintainer("George Gastaldi").user("GEORGE");
+      assertThat(descriptor.getInstructions().size(), equalTo(3));
+      String output = descriptor.exportAsString();
+      Assert.assertEquals("FROM jbossforge\nMAINTAINER George Gastaldi\nUSER GEORGE", output);
    }
 
    @Test
