@@ -3,9 +3,11 @@ A ShrinkWrap Descriptors implementation for Dockerfiles
 
 [source, java]
 ----
-DockerDescriptor descriptor = Descriptors.create(DockerDescriptor.class);
-descriptor.from().name("jbossforge");
-descriptor.user().name("George");
+DockerDescriptor descriptor = 
+  Descriptors.create(DockerDescriptor.class)
+    .from("jbossforge")
+    .user("George");
+  
 System.out.println(descriptor.exportAsString());
 ----
 
