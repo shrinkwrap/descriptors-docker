@@ -29,14 +29,14 @@ Add the following dependencies to your pom.xml:
 <dependency>
   <groupId>org.jboss.shrinkwrap.descriptors</groupId>
   <artifactId>shrinkwrap-descriptors-api-docker</artifactId>
-  <version>1.0.0-alpha-1</version>
+  <version>1.0.0-alpha-2</version>
 </dependency>
 
 <!-- Docker Descriptors Implementation -->      
 <dependency>
   <groupId>org.jboss.shrinkwrap.descriptors</groupId>
   <artifactId>shrinkwrap-descriptors-impl-docker</artifactId>
-  <version>1.0.0-alpha-1</version>
+  <version>1.0.0-alpha-2</version>
   <scope>runtime</scope>
 </dependency>
 ----
